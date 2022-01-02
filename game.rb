@@ -14,7 +14,7 @@ class Game
 
   def goodbye_message
     puts '---- GAME OVER -----'
-    puts 'Good bye!'
+    print 'Good bye!'
   end
 
   def play
@@ -22,19 +22,17 @@ class Game
     puts 'Welcome to Two-O-Player Math Game!'
 
     until game_over
-      puts lives = @player1.lives
-
       # player question after each round
       @player1.answers_question
 
       # score display after each round
       puts "P1: #{@player1.lives_left} vs P2: #{@player2.lives_left}"
 
-      puts '----- NEW TURN ----'
+      puts @player1.lives == 0 ? goodbye_message : '----- NEW TURN -----'
     end
 
-    #closing remarks
-    goodbye_message
+    # #closing remarks
+    # goodbye_message
   end
 
   def info
