@@ -28,4 +28,8 @@ class Player
   def lives_left
     "#{@lives}/3"
   end
+
+  def game_over
+    @lives_left = 0
+  end
 end
