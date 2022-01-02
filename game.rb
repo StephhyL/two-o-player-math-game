@@ -7,6 +7,11 @@ class Game
     @players = [@player1, @player2]
   end
 
+  def game_over
+    #"filter" for the players array. If the player is a loser (@lives_left = 0), then it would be added to the array and when there is a loser, the game is over
+    @players.select { |player| player.loser? }.count > 0
+  end
+
   def goodbye_message
     puts '---- GAME OVER -----'
     puts 'Good bye!'
@@ -16,13 +21,17 @@ class Game
     # intro
     puts 'Welcome to Two-O-Player Math Game!'
 
-    # player question after each round
-    @player1.answers_question
+    until game_over
+      puts lives = @player1.lives
 
-    # score display after each round
-    puts "P1: #{@player1.lives_left} vs P2: #{@player2.lives_left}"
+      # player question after each round
+      @player1.answers_question
 
-    puts '----- NEW TURN ----'
+      # score display after each round
+      puts "P1: #{@player1.lives_left} vs P2: #{@player2.lives_left}"
+
+      puts '----- NEW TURN ----'
+    end
 
     #closing remarks
     goodbye_message
