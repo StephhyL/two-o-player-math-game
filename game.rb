@@ -7,6 +7,13 @@ class Game
   end
 
   def play
+    puts "#{@player1}: What does 5 plus 3 equal?"
+    print '> '
+    answer = gets.chomp.to_i
+
+    puts answer === 8 ? 'YES! You are correct' : 'Seriously? No!'
+
+    # puts "> #{gets.chomp}"
     puts '----- NEW TURN ----'
   end
 
