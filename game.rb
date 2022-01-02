@@ -4,7 +4,14 @@ class Game
   def initialize
     @player1 = Player.new('Player 1')
     @player2 = Player.new('Player 2')
-    @players = [@player1, @player2]
+
+    #shuffles the player list so that it's not always player 1 that starts (to make it more fair)
+    @players = [@player1, @player2].shuffle
+  end
+
+  #since current_player is the first element in the players array and measuring the loser, the winner is the last element in the array
+  def getWinner
+    @players.last
   end
 
   def game_over
@@ -13,8 +20,10 @@ class Game
   end
 
   def goodbye_message
+    puts '--------------------'
+    puts "#{getWinner.name} wins wih a score of #{getWinner.lives_left}"
     puts '---- GAME OVER -----'
-    print 'Good bye!'
+    puts 'Good bye!'
   end
 
   def play
@@ -22,21 +31,22 @@ class Game
     puts 'Welcome to Two-O-Player Math Game!'
 
     until game_over
+      @current_player = @players.first
+
       # player question after each round
-      @player1.answers_question
+      @current_player.answers_question
 
       # score display after each round
       puts "P1: #{@player1.lives_left} vs P2: #{@player2.lives_left}"
 
-      puts @player1.lives == 0 ? goodbye_message : '----- NEW TURN -----'
+      if @current_player.lives > 0
+        puts '----- NEW TURN -----'
+
+        #use the ! to mutate the original array
+        @players.rotate!
+      else
+        goodbye_message
+      end
     end
-
-    # #closing remarks
-    # goodbye_message
-  end
-
-  def info
-    p @player1
-    p @player2
   end
 end
