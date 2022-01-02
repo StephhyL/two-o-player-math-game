@@ -26,10 +26,10 @@ class Player
   end
 
   def lives_left
-    "#{@lives}/3"
+    "#{self.lives}/3"
   end
 
-  def game_over
-    @lives_left = 0
+  def loser?
+    self.lives === 0
   end
 end
